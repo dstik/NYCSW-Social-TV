@@ -1,6 +1,6 @@
 <app>
 	<id>hello-world</id>
-	<name>Hello World</name>
+	<name>CoViewer</name>
 	<version>1.0</version>
 	<description>Hello World boxee app.</description>
   <thumb>http://www.shazaml.com/downloads/boxee-blueprint.png</thumb>
