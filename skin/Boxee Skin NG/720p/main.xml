@@ -33,6 +33,13 @@ logging.error('##################')
 				<texture>white.png</texture>
 			</control>
          <control type="image">
+             <posx>30</posx>
+             <posy>30</posy>
+			<width>330</width>
+			<height>660</height>
+             <texture>sidebar.png</texture>
+          </control>
+         <control type="image">
              <posx>432</posx>
              <posy>30</posy>
 			<width>800</width>
