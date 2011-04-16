@@ -10,6 +10,11 @@
 				<height>720</height>
 				<texture>white.png</texture>
 			</control>
+         <control type="image">
+             <posx>350</posx>
+             <posy>50</posy>
+             <texture>details.png</texture>
+          </control>
 			<control type="group" id="110">
 				<animation type="Conditional" condition="Window.IsVisible(DialogProgress.xml)">
 					<effect type="fade" start="100" end="20" time="200"/>
