@@ -2,33 +2,157 @@
 <window type="window" id="14000">
 	<defaultcontrol always="true">120</defaultcontrol>
 	<controls>
-    <control type="label" id="100">
-      <label>Hello World!</label>
-      <posx>75</posx>
-      <posy>20</posy>
-      <width>700</width>
-      <height>35</height>
-      <font>font36b</font>
-      <align>left</align>
-      <aligny>center</aligny>
-      <textcolor>FF5899CA</textcolor>
-    </control>
-    <control type="button" id="120">
-      <label>Click me</label>
-      <posx>75</posx>
-      <posy>70</posy>
-      <width>100</width>
-      <height>35</height>
-      <textcolor>FF5899CA</textcolor>
-      <selectedcolor>FF5899CA</selectedcolor>
-      <onclick lang="python">
-<![CDATA[
-mc.ShowDialogNotification('Boxee Rocks!')
-]]>
-      </onclick>
-    </control>   
+<control type="group">
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>1280</width>
+				<height>720</height>
+				<texture>white.png</texture>
+			</control>
+			<control type="button" id="100">
+				<posx>382</posx>
+				<posy>154</posy>
+				<width>515</width>
+				<height>412</height>
+				<label>-</label>
+				<texturenofocus>start.png</texturenofocus>
+				<texturefocus>start.png</texturefocus>
+				<onclick lang="python"><![CDATA[
+mc.GetWindow(14000).GetControl(100).SetVisible(False)						
+mc.GetWindow(14000).GetControl(110).SetVisible(True)
+mc.GetWindow(14000).GetControl(111).SetFocus()			
+]]></onclick>
+			</control>
+			<control type="group" id="110">
+				<visible>false</visible>
+				<animation type="Conditional" condition="Window.IsVisible(DialogProgress.xml)">
+					<effect type="fade" start="100" end="20" time="200"/>
+				</animation>
+				<control type="image">
+					<posx>156</posx>
+					<posy>0</posy>
+					<width>968</width>
+					<height>720</height>
+					<texture>main.png</texture>
+				</control>
+				<control type="videowindow">
+					<posx>156</posx>
+					<posy>60</posy>
+					<width>600</width>
+					<height>558</height>
+				</control>
+				<control type="list" id="111">
+					<posx>786</posx>
+					<posy>222</posy>
+					<width>337</width>
+					<height>224</height>
+					<onleft>114</onleft>
+					<onright>-</onright>
+					<onup>-</onup>
+					<ondown>112</ondown>
+					<scrolltime>200</scrolltime>
+					<pagecontrol>-</pagecontrol>
+					<orientation>vertical</orientation>
+					<itemlayout width="337" height="28">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>337</width>
+							<height>28</height>
+							<texture>white.png</texture>
+							<colordiffuse>FFD33B37</colordiffuse>
+						</control>
+						<control type="label">
+							<posx>-320</posx>
+							<posy>0</posy>
+							<width>657</width>
+							<height>28</height>
+							<font>font28b</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+							<textcolor>white</textcolor>
+							<selectedcolor>FFFDF041</selectedcolor>
+						</control>
+					</itemlayout>
+					<focusedlayout width="337" height="28">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>337</width>
+							<height>28</height>
+							<texture>white.png</texture>
+							<colordiffuse>FFD33B37</colordiffuse>
+						</control>
+						<control type="label">
+							<visible>!Control.HasFocus(111)</visible>
+							<posx>-320</posx>
+							<posy>0</posy>
+							<width>657</width>
+							<height>28</height>
+							<font>font28b</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+							<textcolor>white</textcolor>
+							<selectedcolor>FFFDF041</selectedcolor>
+						</control>
+						<control type="label">
+							<visible>Control.HasFocus(111)</visible>
+							<posx>-320</posx>
+							<posy>0</posy>
+							<width>657</width>
+							<height>28</height>
+							<font>font28b</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+							<textcolor>FFFDF041</textcolor>
+							<selectedcolor>FFFDF041</selectedcolor>
+							<scroll>true</scroll>
+							<scrollspeed>30</scrollspeed>
+						</control>
+					</focusedlayout>
+					<content type="url" url="rss://gdata.youtube.com/feeds/api/standardfeeds/most_popular?v=2&amp;alt=rss">
+						<onclick lang="python"><![CDATA[
+n = mc.GetWindow(14000).GetList(111).GetFocusedItem()
+items = mc.GetWindow(14000).GetList(111).GetItems()
+if mc.GetPlayer().IsPlaying():
+    mc.GetPlayer().Stop()
+#playlist = mc.PlayList(mc.PlayList.PLAYLIST_VIDEO)
+#playlist.Clear()
+#for item in items:
+#    playlist.Add(item)
+#mc.GetPlayer().PlaySelected( n )
+mc.GetPlayer().Play( items[n] )
+#mc.GetPlayer().PlayWithActionMenu( item )
+]]></onclick>
+					</content>
+				</control>
+				<control type="image">
+					<visible>!Player.HasVideo</visible>
+					<posx>180</posx>
+					<posy>150</posy>
+					<width>565</width>
+					<height>380</height>
+					<texture>$INFO[Container(111).ListItem.Thumb]</texture>
+				</control>
+				<control type="button" id="114">
+					<posx>418</posx>
+					<posy>280</posy>
+					<width>120</width>
+					<height>120</height>
+					<label>-</label>
+					<texturenofocus>-</texturenofocus>
+					<texturefocus>osd_control_play_on.png</texturefocus>
+					<visible>Player.HasVideo</visible>
+					<onclick>ActivateWindow(FullscreenVideo)</onclick>
+					<hitrect x="180" y="150" w="565" h="380"/>
+					<onright>111</onright>
+				</control>
+			</control>
+		</control>
 	</controls>
 </window>
-
-
 

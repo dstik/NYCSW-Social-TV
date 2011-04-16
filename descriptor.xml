@@ -1,13 +1,13 @@
 <app>
-	<id>hello-world</id>
-	<name>Hello World</name>
+	<id>coviewer</id>
+	<name>CoViewer</name>
 	<version>1.0</version>
-	<description>Hello World boxee app.</description>
+	<description>Share your TV viewing experience.</description>
   <thumb>http://www.shazaml.com/downloads/boxee-blueprint.png</thumb>
 	<repository>http://dir.boxee.tv/apps</repository>
 	<media>picture</media>
-	<copyright>Mark Tucker</copyright>
-	<email>mail@shazaml.com</email>
+	<copyright>CoViewer 2011</copyright>
+	<email>info@coviewer.tv</email>
 	<type>skin</type>
 	<startWindow>14000</startWindow>
 	<platform>all</platform>
