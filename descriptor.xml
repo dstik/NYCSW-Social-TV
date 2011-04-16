@@ -1,0 +1,16 @@
+<app>
+	<id>hello-world</id>
+	<name>Hello World</name>
+	<version>1.0</version>
+	<description>Hello World boxee app.</description>
+  <thumb>http://www.shazaml.com/downloads/boxee-blueprint.png</thumb>
+	<repository>http://dir.boxee.tv/apps</repository>
+	<media>picture</media>
+	<copyright>Mark Tucker</copyright>
+	<email>mail@shazaml.com</email>
+	<type>skin</type>
+	<startWindow>14000</startWindow>
+	<platform>all</platform>
+	<minversion>0.9.11</minversion>
+	<test-app>true</test-app>
+</app>

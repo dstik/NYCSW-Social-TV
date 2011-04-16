@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<window type="window" id="14000">
+	<defaultcontrol always="true">120</defaultcontrol>
+	<controls>
+    <control type="label" id="100">
+      <label>Hello World!</label>
+      <posx>75</posx>
+      <posy>20</posy>
+      <width>700</width>
+      <height>35</height>
+      <font>font36b</font>
+      <align>left</align>
+      <aligny>center</aligny>
+      <textcolor>FF5899CA</textcolor>
+    </control>
+    <control type="button" id="120">
+      <label>Click me</label>
+      <posx>75</posx>
+      <posy>70</posy>
+      <width>100</width>
+      <height>35</height>
+      <textcolor>FF5899CA</textcolor>
+      <selectedcolor>FF5899CA</selectedcolor>
+      <onclick lang="python">
+<![CDATA[
+mc.ShowDialogNotification('Boxee Rocks!')
+]]>
+      </onclick>
+    </control>   
+	</controls>
+</window>
+
+
+
