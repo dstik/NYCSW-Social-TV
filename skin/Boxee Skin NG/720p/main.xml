@@ -9,7 +9,14 @@
              <posy>0</posy>
              <width>1280</width>
              <height>720</height>
-             <texture>debuggrid.png</texture>
+             <texture>white.png</texture>
+          </control>
+		  <control type="image">
+             <posx>5</posx>
+             <posy>675</posy>
+             <width>320</width>
+             <height>45</height>
+             <texture>coviewer.png</texture>
           </control>
           <control type="mover" id="3">
            <posx>0</posx>
@@ -17,14 +24,14 @@
            <width>300</width>
            <height>720</height>
 		   <pulseonselect>true</pulseonselect>
-           <texturefocus>list.png</texturefocus>
-           <texturenofocus>list.png</texturenofocus>
+           <texturefocus>sidebar.png</texturefocus>
+           <texturenofocus>sidebar.png</texturenofocus>
           </control>
 
          <control type="image">
              <posx>350</posx>
              <posy>50</posy>
-             <texture>details.png</texture>
+             <texture>tv_frame.png</texture>
           </control>
 		  <control type="group" id="110">
 				<visible>false</visible>
@@ -229,21 +236,6 @@ mc.GetPlayer().Play( items[n] )
               <width>560</width>
               <height>230</height>
               <texture>$INFO[Container(100).ListItem.Thumb]</texture>
-           </control>
-		   
-           <control type="label">
-              <visible>true</visible>
-              <posx>535</posx>
-              <posy>600</posy>
-              <width>560</width>
-              <height>115</height>
-              <font>light23</font>
-              <align>left</align>
-              <aligny>center</aligny>
-              <label>[B]Description:[/B] $INFO[Container(100).ListItem.property(description)]</label>
-              <background>grey</background>
-              <textcolor>white</textcolor>
-              <wrapmultiline>true</wrapmultiline>
            </control>
          </control>
       </control>
