@@ -10,32 +10,10 @@
 				<height>720</height>
 				<texture>white.png</texture>
 			</control>
-			<control type="button" id="100">
-				<posx>382</posx>
-				<posy>154</posy>
-				<width>515</width>
-				<height>412</height>
-				<label>-</label>
-				<texturenofocus>start.png</texturenofocus>
-				<texturefocus>start.png</texturefocus>
-				<onclick lang="python"><![CDATA[
-mc.GetWindow(14000).GetControl(100).SetVisible(False)						
-mc.GetWindow(14000).GetControl(110).SetVisible(True)
-mc.GetWindow(14000).GetControl(111).SetFocus()			
-]]></onclick>
-			</control>
 			<control type="group" id="110">
-				<visible>false</visible>
 				<animation type="Conditional" condition="Window.IsVisible(DialogProgress.xml)">
 					<effect type="fade" start="100" end="20" time="200"/>
 				</animation>
-				<control type="image">
-					<posx>156</posx>
-					<posy>0</posy>
-					<width>968</width>
-					<height>720</height>
-					<texture>main.png</texture>
-				</control>
 				<control type="videowindow">
 					<posx>156</posx>
 					<posy>60</posy>
@@ -120,13 +98,7 @@ n = mc.GetWindow(14000).GetList(111).GetFocusedItem()
 items = mc.GetWindow(14000).GetList(111).GetItems()
 if mc.GetPlayer().IsPlaying():
     mc.GetPlayer().Stop()
-#playlist = mc.PlayList(mc.PlayList.PLAYLIST_VIDEO)
-#playlist.Clear()
-#for item in items:
-#    playlist.Add(item)
-#mc.GetPlayer().PlaySelected( n )
 mc.GetPlayer().Play( items[n] )
-#mc.GetPlayer().PlayWithActionMenu( item )
 ]]></onclick>
 					</content>
 				</control>
