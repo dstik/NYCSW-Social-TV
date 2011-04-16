@@ -1,8 +1,8 @@
 <app>
-	<id>hello-world</id>
-	<name>Hello World</name>
+	<id>NYCSW-Social-TV</id>
+	<name>coviewer</name>
 	<version>1.0</version>
-	<description>Hello World boxee app.</description>
+	<description>Watch TV with your friends -- Together</description>
   <thumb>http://www.shazaml.com/downloads/boxee-blueprint.png</thumb>
 	<repository>http://dir.boxee.tv/apps</repository>
 	<media>picture</media>
