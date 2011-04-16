@@ -2,7 +2,6 @@
 <window type="window" id="14000">
 			<onload lang="python">
 <![CDATA[
-import logging
 logging.error('##################')
 items = mc.ListItems()
 item = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
@@ -15,6 +14,14 @@ mc.GetPlayer().PlayInBackground(items[0])
 logging.error('##################')
 ]]>
 		   </onload>
+		<onunload lang="python">
+<![CDATA[
+logging.error('##################')
+if mc.GetPlayer().IsPlaying():
+	mc.GetPlayer().Stop()
+logging.error('##################')
+]]>
+		   </onunload>
 	<defaultcontrol always="true">120</defaultcontrol>
 	<controls>
 		<control type="group">
