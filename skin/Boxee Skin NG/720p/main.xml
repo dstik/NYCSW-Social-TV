@@ -51,7 +51,6 @@ class PollingJob(jobmanager.BoxeeJob):
     def process(self):
         # This is the base function that is always called for every job and the one you should extend.
         logging.debug('JOB-JOB-JOB-JOB-JOB-JOB')
-#        data_obj = urllib2.urlopen("http://2.iridium-flares.appspot.com/coviewer")
         data_obj = urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/getUserList")
         if data_obj:
             boxeeItems = mc.ListItems()
