@@ -13,7 +13,8 @@ import random
 import getpass
 import simplejson as json
 
-logging.error('##################')
+logging.getLogger().setLevel(logging.DEBUG)
+logging.debug('##################')
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue('user_id')
 if not user_id:
@@ -26,8 +27,8 @@ if not user_name:
     user_name = getpass.getuser()
     config.SetValue("user_name", user_name)
 #config.SetValue("user_name", 'Heliodor')
-logging.error('Logging in USER_ID: ' + user_id)
-logging.error('Logging in USER_NAME: ' + user_name)
+logging.debug('Logging in USER_ID: ' + user_id)
+logging.debug('Logging in USER_NAME: ' + user_name)
 urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogin/" + user_id + "/" + urllib.quote(user_name))
 
 class PollingJob(jobmanager.BoxeeJob):
@@ -40,7 +41,7 @@ class PollingJob(jobmanager.BoxeeJob):
     
     def process(self):
         # This is the base function that is always called for every job and the one you should extend.
-        logging.error('JOB-JOB-JOB-JOB-JOB-JOB')
+        logging.debug('JOB-JOB-JOB-JOB-JOB-JOB')
         data_obj = urllib2.urlopen("http://2.iridium-flares.appspot.com/coviewer")
 #        data_obj = urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/getUserList")
         if data_obj:
@@ -48,18 +49,17 @@ class PollingJob(jobmanager.BoxeeJob):
             data = json.load(data_obj)
             for item in data:
                 boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
-    	        logging.error('LIST ITEM    : ' + str(item))
-    	        logging.error('LIST ITEM VID: ' + item[u'url'])
+    	        logging.debug('LIST ITEM    : ' + str(item))
+    	        logging.debug('LIST ITEM VID: ' + item[u'url'])
                 boxeeItem.SetPath(str(item[u'url']))
-                boxeeItem.SetTitle(str(item[u'name']))
+                boxeeItem.SetTitle(str(item[u'username']) + ' - ' + str(item[u'firstname']))
                 boxeeItem.SetLabel(str(item[u'name']))
-                boxeeItem.SetDescription(str(item[u'name']))
                 boxeeItem.SetThumbnail(str(item[u'thumb']))
                 boxeeItems.append(boxeeItem)
-    	        logging.error('LIST SIZE: ' + str(len(boxeeItems)))
+    	        logging.debug('LIST SIZE: ' + str(len(boxeeItems)))
             #something
             mc.GetWindow(14000).GetList(4499).SetItems(boxeeItems)
-        logging.error('JOB-JOB-JOB-JOB-JOB-JOB')
+        logging.debug('JOB-JOB-JOB-JOB-JOB-JOB')
 
 
 #Process job queue every 30 seconds (instead of default 10):
@@ -77,15 +77,15 @@ myJobManager.start()
 		   </onload>
 		<onunload lang="python">
 <![CDATA[
-logging.error('##################')
+logging.debug('##################')
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue("username")
-logging.error('Logging out USER_ID: ' + user_id)
+logging.debug('Logging out USER_ID: ' + user_id)
 urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogout/" + user_id)
 if mc.GetPlayer().IsPlaying():
     mc.GetPlayer().Stop()
 myJobManager.stop()
-logging.error('##################')
+logging.debug('##################')
 ]]>
 		   </onunload>
 	<defaultcontrol always="true">120</defaultcontrol>
@@ -153,7 +153,7 @@ logging.error('##################')
                  <texturefocus>searchtext.png</texturefocus>
                  <ontextchange lang="python">
 <![CDATA[
-logging.error('Start YouTube search')
+logging.debug('Start YouTube search')
 data_obj = urllib2.urlopen("http://gdata.youtube.com/feeds/api/videos?q=surfing&caption&v=2&alt=json")
 if data_obj:
     data = json.load(data_obj)
@@ -166,7 +166,7 @@ if data_obj:
                 boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
                 boxeeItem.SetPath(str(link[u'href']))
 
-             logging.error('LIST ITEM    : ' + str(link))
+                logging.debug('LIST ITEM    : ' + str(link))
 
 
                 # Run video
@@ -177,7 +177,7 @@ if data_obj:
                 # Break
                 break
     
-logging.error('End YouTube search')
+logging.debug('End YouTube search')
 ]]>   
                  </ontextchange>
              </control>
@@ -202,50 +202,61 @@ logging.error('End YouTube search')
 
 		<control type="list" id="4499">
 							<posx>30</posx>
-							<posy>30</posy>
+							<posy>60</posy>
 							<width>240</width>
 							<height>660</height>
 							<scrolltime>200</scrolltime>
 							<pagecontrol>-</pagecontrol>
 							<orientation>vertical</orientation>
-							<itemlayout width="337" height="28">
+							<itemlayout width="337" height="80">
 								<control type="label">
-									<posx>-320</posx>
+									<posx>0</posx>
 									<posy>0</posy>
 									<width>657</width>
-									<height>28</height>
-									<font>font28b</font>
+									<font>font18b</font>
 									<align>left</align>
 									<aligny>center</aligny>
-									<label>[UPPERCASE]$INFO[ListItem.Title][/UPPERCASE]</label>
-									<textcolor>white</textcolor>
-									<selectedcolor>FFFDF041</selectedcolor>
-								</control>
-							</itemlayout>
-							<focusedlayout width="337" height="28">
-								<control type="label">
-									<visible>!Control.HasFocus(4499)</visible>
-									<posx>-320</posx>
-									<posy>0</posy>
-									<width>657</width>
-									<height>28</height>
-									<font>font28b</font>
-									<align>left</align>
-									<aligny>center</aligny>
-									<label>[UPPERCASE]$INFO[ListItem.Title][/UPPERCASE]</label>
+									<label>$INFO[ListItem.Title]</label>
 									<textcolor>white</textcolor>
 									<selectedcolor>FFFDF041</selectedcolor>
 								</control>
 								<control type="label">
 									<visible>Control.HasFocus(4499)</visible>
-									<posx>-320</posx>
-									<posy>0</posy>
+									<posx>30</posx>
+									<posy>30</posy>
 									<width>657</width>
-									<height>28</height>
-									<font>font28b</font>
+									<font>font14</font>
 									<align>left</align>
 									<aligny>center</aligny>
-									<label>[UPPERCASE]$INFO[ListItem.Title][/UPPERCASE]</label>
+									<label>$INFO[ListItem.Label]</label>
+									<textcolor>FFFDF041</textcolor>
+									<selectedcolor>FFFDF041</selectedcolor>
+									<scroll>true</scroll>
+									<scrollspeed>30</scrollspeed>
+								</control>
+							</itemlayout>
+							<focusedlayout width="337" height="80">
+								<control type="label">
+									<visible>!Control.HasFocus(4499)</visible>
+									<posx>0</posx>
+									<posy>0</posy>
+									<width>657</width>
+									<font>font18b</font>
+									<align>left</align>
+									<aligny>center</aligny>
+									<label>$INFO[ListItem.Title]</label>
+									<textcolor>white</textcolor>
+									<selectedcolor>FFFDF041</selectedcolor>
+								</control>
+								<control type="label">
+									<visible>Control.HasFocus(4499)</visible>
+									<posx>30</posx>
+									<posy>30</posy>
+									<width>657</width>
+									<font>font14</font>
+									<align>left</align>
+									<aligny>center</aligny>
+									<label>$INFO[ListItem.Label]</label>
 									<textcolor>FFFDF041</textcolor>
 									<selectedcolor>FFFDF041</selectedcolor>
 									<scroll>true</scroll>
@@ -255,7 +266,18 @@ logging.error('End YouTube search')
 					<onclick lang="python"><![CDATA[
 # list item selection goes here
 import logging
-logging.error('ITEM CLICKED')
+logging.debug('ITEM CLICKED')
+
+# Create items
+boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
+boxeeItem.SetPath(str(link[u'href']))
+
+logging.debug('LIST ITEM    : ' + str(link))
+
+# Run video
+if mc.GetPlayer().IsPlaying():
+    mc.GetPlayer().Stop()
+mc.GetPlayer().PlayInBackground(boxeeItem)
 ]]>
 					</onclick>
           </control>
