@@ -2,24 +2,84 @@
 <window type="window" id="14000">
 			<onload lang="python">
 <![CDATA[
+import sys
+sys.path.append('.')
 import logging
+import urllib
+import urllib2
+import mc
+import jobmanager
+import random
+
+name_list = ['Shane Reiser', 
+             "Charlie O'Donnell", 
+             'Fred Wilson', 
+             'Chris Dixon', 
+             'Mark Suster', 
+             'Paul Buchheit', 
+             'Paul Graham', 
+             'Bill Gates', 
+             'Steve Ballmer', 
+             'Steve Jobs', 
+             'Larry Page',
+             'Sergey Brin'
+]
 logging.error('##################')
-items = mc.ListItems()
-item = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
-item.SetPath("http://www.youtube.com/watch?v=X-tNXS-ihwI")
-items.append(item)
-if mc.GetPlayer().IsPlaying():
-	mc.GetPlayer().Stop()
-logging.error('SIZE##############: ' + str(len(items)))
-mc.GetPlayer().PlayInBackground(items[0])
-logging.error('##################')
+config = mc.GetApp().GetLocalConfig()
+user_id = config.GetValue('user_id')
+if not user_id:
+    user_id = 'boxeer_' + str(random.randrange(100000, 999999))
+    config.SetValue("user_id", user_id)
+user_name = config.GetValue('user_name')
+if not user_name:
+    user_name = name_list[random.randrange(0, len(name_list))]
+    config.SetValue("user_name", user_name)
+logging.error('Logging in USER_ID: ' + user_id)
+logging.error('Logging in USER_NAME: ' + user_name)
+urllib2.urlopen("http://www.coviewer.tv/boxee/userLogin/" + user_id + "/" + user_name)
+
+class PollingJob(jobmanager.BoxeeJob):
+    # Add your own variables to constructor.
+    def __init__(self, message, interval):
+        self.message = message
+        self.interval = interval
+        # Be sure to always inherit the constructor from the base BoxeeJob class.
+        jobmanager.BoxeeJob.__init__(self, "PollingJob", interval)
+    
+    def process(self):
+        # This is the base function that is always called for every job and the one you should extend.
+        logging.error('JOB-JOB-JOB-JOB-JOB-JOB')
+        data_obj = urllib2.urlopen("http://www.coviewer.tv/boxee/getUserList")
+        if data_obj:
+            boxeeItems = mc.ListItems()
+            data = data_obj.read()
+            for item in data['items']:
+                boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
+                boxeeItem.SetPath(item['videourl'])
+                boxeeItems.append(boxeeItem)
+        logging.error('JOB-JOB-JOB-JOB-JOB-JOB')
+
+
+#Process job queue every 30 seconds (instead of default 10):
+myJobManager = jobmanager.BoxeeJobManager(5)
+
+#Add polling job to Job Manager:
+myJob = PollingJob("MESSAGE GOES HERE", 5)
+myJobManager.addJob(myJob)
+
+#Start Job Manager:
+myJobManager.start()
 ]]>
 		   </onload>
 		<onunload lang="python">
 <![CDATA[
 logging.error('##################')
+config = mc.GetApp().GetLocalConfig()
+user_id = config.GetValue("username")
+logging.error('Logging out USER_ID: ' + user_id)
+urllib2.urlopen("http://www.coviewer.tv/boxee/userLogout/" + user_id)
 if mc.GetPlayer().IsPlaying():
-	mc.GetPlayer().Stop()
+    mc.GetPlayer().Stop()
 logging.error('##################')
 ]]>
 		   </onunload>
