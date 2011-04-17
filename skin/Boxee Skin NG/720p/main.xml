@@ -2,6 +2,7 @@
 <window type="window" id="14000">
 			<onload lang="python">
 <![CDATA[
+import urllib
 logging.error('##################')
 items = mc.ListItems()
 item = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
@@ -47,9 +48,6 @@ logging.error('##################')
              <texture>details.png</texture>
           </control>
 			<control type="group" id="110">
-				<animation type="Conditional" condition="Window.IsVisible(DialogProgress.xml)">
-					<effect type="fade" start="100" end="20" time="200"/>
-				</animation>
 				<control type="videowindow">
 					<posx>538</posx>
 					<posy>110</posy>
