@@ -184,11 +184,11 @@ if data_obj:
                 for link in links:
                     if link['type'] == "text/html":
                         # Run video
-						config = mc.GetApp().GetLocalConfig()
-						user_id = config.GetValue('user_id')
-						vid_href = str(link[u'href'])
-						title = entry['title']['$t']
-                        stopVid(user_id)
+                        config = mc.GetApp().GetLocalConfig()
+                        user_id = config.GetValue('user_id')
+                        vid_href = str(link[u'href'])
+                        title = entry['title']['$t']
+                        endVid(user_id)
                         startVid(user_id, vid_href, title)
 
                         # Break
