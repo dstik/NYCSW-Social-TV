@@ -61,8 +61,8 @@ class PollingJob(jobmanager.BoxeeJob):
     	        logging.debug('LIST ITEM    : ' + str(item))
     	        logging.debug('LIST ITEM VID: ' + item[u'url'])
                 boxeeItem.SetPath(urllib.unquote_plus(str(item[u'url'])))
-                boxeeItem.SetTitle(urllib.unquote_plus(str(item[u'firstname'])))
-                boxeeItem.SetLabel(urllib.unquote_plus(str(item[u'name'])))
+                boxeeItem.SetTitle(urllib.unquote_plus(str(item[u'name'])))
+                boxeeItem.SetLabel(urllib.unquote_plus(str(item[u'firstname'])))
                 boxeeItems.append(boxeeItem)
     	        logging.debug('LIST SIZE: ' + str(len(boxeeItems)))
             #something
@@ -235,7 +235,7 @@ if data_obj:
 									<font>font24b</font>
 									<align>left</align>
 									<aligny>center</aligny>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.Title]</label>
 									<textcolor>white</textcolor>
 									<selectedcolor>blue</selectedcolor>
 								</control>
@@ -247,7 +247,7 @@ if data_obj:
 									<font>font34b</font>
 									<align>left</align>
 									<aligny>center</aligny>
-									<label>$INFO[ListItem.Title]</label>
+									<label>$INFO[ListItem.Label]</label>
 									<textcolor>white</textcolor>
 									<selectedcolor>blue</selectedcolor>
 									 <scroll>true</scroll> -->
@@ -263,7 +263,7 @@ if data_obj:
 									<font>font24b</font>
 									<align>left</align>
 									<aligny>center</aligny>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.Title]</label>
 									<textcolor>FFF99E1C</textcolor>
 									<selectedcolor>blue</selectedcolor>
 								</control>
@@ -275,14 +275,14 @@ if data_obj:
 									<font>font34b</font>
 									<align>left</align>
 									<aligny>center</aligny>
-									<label>$INFO[ListItem.Title]</label>
+									<label>$INFO[ListItem.Label]</label>
 									<textcolor>FFF99E1C</textcolor>
 									<selectedcolor>blue</selectedcolor>
 								<!--	<scroll>true</scroll>
 									<scrollspeed>30</scrollspeed>-->
 								</control>
 							</focusedlayout>
-					<content type="action">
+							<content type="action">
 					<onclick lang="python"><![CDATA[
 # list item selection goes here
 import logging
