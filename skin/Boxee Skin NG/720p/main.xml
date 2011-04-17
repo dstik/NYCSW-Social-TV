@@ -25,30 +25,51 @@ logging.error('##################')
 	<controls>
 		<control type="group">
 			<control type="image">
-				<posx>0</posx>
+				<posx>300</posx>
 				<posy>0</posy>
-				<width>1280</width>
+				<width>980</width>
 				<height>720</height>
-				<texture>white.png</texture>
+				<texture>backgroundgrey.png</texture>
+			</control>
+			<control type="image">
+				<posx>1050</posx>
+				<posy>20</posy>
+				<width>200</width>
+				<height>203</height>
+				<texture>logo.png</texture>
 			</control>
          <control type="image">
-             <posx>30</posx>
-             <posy>30</posy>
-			<width>330</width>
-			<height>660</height>
+             <posx>0</posx>
+             <posy>0</posy>
+			<width>300</width>
+			<height>720</height>
              <texture>sidebar.png</texture>
           </control>
+		  <control type="image">
+             <posx>20</posx>
+             <posy>10</posy>
+			<width>250</width>
+			<height>37</height>
+             <texture>sideheader.png</texture>
+          </control>
+		  <control type="image">
+             <posx>465</posx>
+             <posy>10</posy>
+			<width>500</width>
+			<height>58</height>
+             <texture>searchbar.png</texture>
+          </control>
          <control type="image">
-             <posx>432</posx>
-             <posy>30</posy>
+             <posx>370</posx>
+             <posy>90</posy>
 			<width>800</width>
 			<height>600</height>
-             <texture>details.png</texture>
+             <texture>tv.png</texture>
           </control>
 			<control type="group" id="110">
 				<control type="videowindow">
-					<posx>538</posx>
-					<posy>110</posy>
+					<posx>472</posx>
+					<posy>170</posy>
 					<width>590</width>
 					<height>518</height>
 				</control>
