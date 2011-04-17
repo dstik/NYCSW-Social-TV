@@ -17,6 +17,7 @@ def startVid(user_id, video_id, video_name):
     logging.debug('APIS: Start video: ' + user_id + '  /  ' + video_id + '  /  ' + video_name)
     boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
     boxeeItem.SetPath(video_id)
+    logging.debug('VIDEO_ID: ' + video_id)
     mc.GetPlayer().PlayInBackground(boxeeItem)
     urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoStart/" + urllib.quote_plus(user_id) + "/" + urllib.quote_plus(video_id) + "/" + urllib.quote_plus(video_name))
     return boxeeItem
@@ -281,6 +282,7 @@ if data_obj:
 									<scrollspeed>30</scrollspeed>-->
 								</control>
 							</focusedlayout>
+					<content type="action">
 					<onclick lang="python"><![CDATA[
 # list item selection goes here
 import logging
@@ -296,7 +298,7 @@ user_id = config.GetValue('user_id')
 endVid(user_id)
 startVid(user_id, item.GetPath(), item.GetTitle())
 ]]>
-					</onclick>
+					</onclick></content>
           </control>
 
 
@@ -313,14 +315,6 @@ startVid(user_id, item.GetPath(), item.GetTitle())
 					<posy>170</posy>
 					<width>590</width>
 					<height>518</height>
-				</control>
-				<control type="image">
-					<visible>!Player.HasVideo</visible>
-					<posx>472</posx>
-					<posy>170</posy>
-					<width>590</width>
-					<height>518</height>
-					<texture>$INFO[Container(4499).ListItem.Thumb]</texture>
 				</control>
 				<control type="button" id="114">
 					<visible>!Control.HasFocus(4499)</visible>
