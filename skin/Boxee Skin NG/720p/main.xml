@@ -52,7 +52,7 @@ class PollingJob(jobmanager.BoxeeJob):
     	        logging.debug('LIST ITEM    : ' + str(item))
     	        logging.debug('LIST ITEM VID: ' + item[u'url'])
                 boxeeItem.SetPath(str(item[u'url']))
-                boxeeItem.SetTitle(str(item[u'username']) + ' - ' + str(item[u'firstname']))
+                boxeeItem.SetTitle(str(item[u'firstname']))
                 boxeeItem.SetLabel(str(item[u'name']))
                 boxeeItem.SetThumbnail(str(item[u'thumb']))
                 boxeeItems.append(boxeeItem)
@@ -203,65 +203,65 @@ if data_obj:
 
 		<control type="list" id="4499">
 							<posx>30</posx>
-							<posy>60</posy>
+							<posy>50</posy>
 							<width>240</width>
 							<height>660</height>
 							<scrolltime>200</scrolltime>
 							<pagecontrol>-</pagecontrol>
 							<orientation>vertical</orientation>
-							<itemlayout width="337" height="80">
+							<itemlayout width="337" height="70">
 								<control type="label">
-									<posx>0</posx>
-									<posy>0</posy>
+									<posx>20</posx>
+									<posy>60</posy>
 									<width>657</width>
-									<font>font18b</font>
+									<font>font24b</font>
+									<align>left</align>
+									<aligny>center</aligny>
+									<label>$INFO[ListItem.Label]</label>
+									<textcolor>white</textcolor>
+									<selectedcolor>blue</selectedcolor>
+								</control>
+								<control type="label">
+								<!--	<visible>Control.HasFocus(4499)</visible> -->
+									<posx>0</posx>
+									<posy>30</posy>
+									<width>657</width>
+									<font>font34b</font>
 									<align>left</align>
 									<aligny>center</aligny>
 									<label>$INFO[ListItem.Title]</label>
 									<textcolor>white</textcolor>
-									<selectedcolor>FFFDF041</selectedcolor>
-								</control>
-								<control type="label">
-									<visible>Control.HasFocus(4499)</visible>
-									<posx>30</posx>
-									<posy>30</posy>
-									<width>657</width>
-									<font>font14</font>
-									<align>left</align>
-									<aligny>center</aligny>
-									<label>$INFO[ListItem.Label]</label>
-									<textcolor>FFFDF041</textcolor>
-									<selectedcolor>FFFDF041</selectedcolor>
-									<scroll>true</scroll>
-									<scrollspeed>30</scrollspeed>
+									<selectedcolor>blue</selectedcolor>
+									 <scroll>true</scroll> -->
+									<!--<scrollspeed>30</scrollspeed>-->
 								</control>
 							</itemlayout>
-							<focusedlayout width="337" height="80">
+							<focusedlayout width="337" height="70">
 								<control type="label">
-									<visible>!Control.HasFocus(4499)</visible>
-									<posx>0</posx>
-									<posy>0</posy>
+								<!--	<visible>!Control.HasFocus(4499)</visible> -->
+									<posx>20</posx>
+									<posy>60</posy>
 									<width>657</width>
-									<font>font18b</font>
-									<align>left</align>
-									<aligny>center</aligny>
-									<label>$INFO[ListItem.Title]</label>
-									<textcolor>white</textcolor>
-									<selectedcolor>FFFDF041</selectedcolor>
-								</control>
-								<control type="label">
-									<visible>Control.HasFocus(4499)</visible>
-									<posx>30</posx>
-									<posy>30</posy>
-									<width>657</width>
-									<font>font14</font>
+									<font>font24b</font>
 									<align>left</align>
 									<aligny>center</aligny>
 									<label>$INFO[ListItem.Label]</label>
-									<textcolor>FFFDF041</textcolor>
-									<selectedcolor>FFFDF041</selectedcolor>
-									<scroll>true</scroll>
-									<scrollspeed>30</scrollspeed>
+									<textcolor>FFF99E1C</textcolor>
+									<selectedcolor>blue</selectedcolor>
+								</control>
+								<control type="label">
+									<!--<visible>Control.HasFocus(4499)</visible>-->
+									<posx>0</posx>
+									<posy>30</posy>
+									<width>657</width>
+									<font>font34b</font>
+									<align>left</align>
+									<aligny>center</aligny>
+									<label>$INFO[ListItem.Title]</label>
+									<textcolor>FFF99E1C</textcolor>
+									<selectedcolor>blue</selectedcolor>
+								<!--	<scroll>true</scroll>
+									<scrollspeed>30</scrollspeed>-->
 								</control>
 							</focusedlayout>
 					<onclick lang="python"><![CDATA[
