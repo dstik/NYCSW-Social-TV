@@ -94,7 +94,7 @@ myJobManager.stop()
 mc.LogDebug('##################')
 ]]>
 		   </onunload>
-	<defaultcontrol always="true">120</defaultcontrol>
+	<defaultcontrol always="true">215</defaultcontrol>
 	<controls>
 		<control type="group">
 			<control type="image">
@@ -144,8 +144,8 @@ mc.LogDebug('##################')
                  <posy>10</posy>   
                  <width>380</width>   
                  <height>58</height>   
-                 <onleft>-</onleft>   
-                 <onright>-</onright>   
+                 <onleft>4499</onleft>   
+                 <onright>216</onright>   
                  <onup>-</onup>   
                  <ondown>9002</ondown>   
                  <onprev>214</onprev>   
@@ -167,6 +167,7 @@ mc.LogDebug('##################')
              <control type="button" id="216">
                  <posx>960</posx>
                  <posy>16</posy>
+                 <onleft>215</onleft>   
                  <width>45</width>
                  <height>46</height>
                  <!--
@@ -226,6 +227,7 @@ if data_obj:
 							<height>660</height>
 							<scrolltime>200</scrolltime>
 							<pagecontrol>-</pagecontrol>
+							<onright>215</onright>
 							<orientation>vertical</orientation>
 							<itemlayout width="337" height="70">
 								<control type="label">
