@@ -59,6 +59,7 @@ class HelloWorldJob(jobmanager.BoxeeJob):
         mc.LogDebug(self.message)
 '''
 
+'''
 def startVid(user_id, video_id, video_name):
     boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
     boxeeItem.SetPath(video_id)
@@ -69,7 +70,7 @@ def startVid(user_id, video_id, video_name):
 def endVid(user_id):
     mc.GetPlayer().Stop()
     urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoEnd/" + urllib.quote(user_id))
-    
+'''    
 
 
 '''

@@ -20,13 +20,11 @@ user_id = config.GetValue('user_id')
 if not user_id:
     user_id = 'boxeer_' + str(random.randrange(100000, 999999))
     config.SetValue("user_id", user_id)
-#config.SetValue("user_id", 'boxeer_' + str(random.randrange(100000, 999999)))
 user_name = config.GetValue('user_name')
 if not user_name:
     #user_name = name_list[random.randrange(0, len(name_list))]
     user_name = getpass.getuser()
     config.SetValue("user_name", user_name)
-#config.SetValue("user_name", 'Heliodor')
 logging.debug('Logging in USER_ID: ' + user_id)
 logging.debug('Logging in USER_NAME: ' + user_name)
 urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogin/" + user_id + "/" + urllib.quote(user_name))
@@ -80,11 +78,12 @@ myJobManager.start()
 mc.LogDebug('##################UNLOAD')
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue("user_id")
-stopVid(user_id)
+#stopVid(user_id)
 logging.debug('Logging out USER_ID: ' + user_id)
 urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogout/" + user_id)
 myJobManager.stop()
 mc.LogDebug('##################')
+]]>
 		   </onunload>
 	<defaultcontrol always="true">120</defaultcontrol>
 	<controls>
@@ -175,9 +174,8 @@ if data_obj:
 						config = mc.GetApp().GetLocalConfig()
 						user_id = config.GetValue('user_id')
 						vid_href = str(link[u'href'])
-                        if mc.GetPlayer().IsPlaying():
-                            stopVid(user_id)
-                        startVid(user_id, vid_href, 'Needs title code')
+#                        stopVid(user_id)
+#                        startVid(user_id, vid_href, 'Needs title code')
 
                         # Break
                         break
@@ -280,8 +278,8 @@ logging.debug('LIST ITEM    : ' + str(link))
 # Run video
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue('user_id')
-endVid(user_id)
-startVid(user_id, str(link[u'href']) , 'Needs title code')
+#endVid(user_id)
+#startVid(user_id, str(link[u'href']) , 'Needs title code')
 ]]>
 					</onclick>
           </control>
