@@ -52,7 +52,6 @@ class PollingJob(jobmanager.BoxeeJob):
                 boxeeItem.SetPath(str(item[u'url']))
                 boxeeItem.SetTitle(str(item[u'username']) + ' - ' + str(item[u'firstname']))
                 boxeeItem.SetLabel(str(item[u'name']))
-                boxeeItem.SetThumbnail(str(item[u'thumb']))
                 boxeeItems.append(boxeeItem)
     	        logging.debug('LIST SIZE: ' + str(len(boxeeItems)))
             #something
@@ -166,16 +165,13 @@ if data_obj:
                 links = entry['link']
                 for link in links:
                     if link['type'] == "text/html":
-                        # Create items
-                        boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
-                        boxeeItem.SetPath(str(link[u'href']))
-
                         # Run video
 						config = mc.GetApp().GetLocalConfig()
 						user_id = config.GetValue('user_id')
 						vid_href = str(link[u'href'])
+						title = entry['title']['$t']
                         stopVid(user_id)
-                        startVid(user_id, vid_href, 'Needs title code')
+                        startVid(user_id, vid_href, title)
 
                         # Break
                         break
@@ -269,17 +265,15 @@ if data_obj:
 import logging
 logging.debug('ITEM CLICKED')
 
-# Create items
-boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
-boxeeItem.SetPath(str(link[u'href']))
-
-logging.debug('LIST ITEM    : ' + str(link))
+mc.GetWindow(14000).GetList(4499).GetFocusedItem()
+itemNumber = mc.GetWindow(14000).GetList(4499).GetFocusedItem()
+item = mc.GetWindow(14000).GetList(4499).GetItem(itemNumber)
 
 # Run video
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue('user_id')
 endVid(user_id)
-startVid(user_id, str(link[u'href']) , 'Needs title code')
+startVid(user_id, item.GetPath(), item.GetTitle())
 ]]>
 					</onclick>
           </control>
