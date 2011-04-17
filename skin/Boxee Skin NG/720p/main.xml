@@ -51,6 +51,10 @@ class PollingJob(jobmanager.BoxeeJob):
     	        logging.error('LIST ITEM    : ' + str(item))
     	        logging.error('LIST ITEM VID: ' + item[u'url'])
                 boxeeItem.SetPath(str(item[u'url']))
+                boxeeItem.SetTitle(str(item[u'name']))
+                boxeeItem.SetLabel(str(item[u'name']))
+                boxeeItem.SetDescription(str(item[u'name']))
+                boxeeItem.SetThumbnail(str(item[u'thumb']))
                 boxeeItems.append(boxeeItem)
     	        logging.error('LIST SIZE: ' + str(len(boxeeItems)))
             #something
@@ -149,31 +153,31 @@ logging.error('##################')
                  <texturefocus>searchtext.png</texturefocus>
                  <ontextchange lang="python">
 <![CDATA[
-        logging.error('Start YouTube search')
-        data_obj = urllib2.urlopen("http://gdata.youtube.com/feeds/api/videos?q=surfing&caption&v=2&alt=json")
-        if data_obj:
-            data = json.load(data_obj)
-            if data and len(data) > 0:
-                links = data['feed']['entry']['link']
-                for link in links:
-                    if link['type'] == "text/html":
+logging.error('Start YouTube search')
+data_obj = urllib2.urlopen("http://gdata.youtube.com/feeds/api/videos?q=surfing&caption&v=2&alt=json")
+if data_obj:
+    data = json.load(data_obj)
+    if data and len(data) > 0:
+        links = data['feed']['entry']['link']
+        for link in links:
+            if link['type'] == "text/html":
 
-                        # Create items
-                        boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
-                        boxeeItem.SetPath(str(link[u'href']))
+                # Create items
+                boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
+                boxeeItem.SetPath(str(link[u'href']))
 
-    	                logging.error('LIST ITEM    : ' + str(link))
+             logging.error('LIST ITEM    : ' + str(link))
 
 
-                        # Run video
-                        if mc.GetPlayer().IsPlaying():
-                            mc.GetPlayer().Stop()
-                        mc.GetPlayer().PlayInBackground(boxeeItem)
+                # Run video
+                if mc.GetPlayer().IsPlaying():
+                    mc.GetPlayer().Stop()
+                mc.GetPlayer().PlayInBackground(boxeeItem)
 
-                        # Break
-                        break
-            
-        logging.error('End YouTube search')
+                # Break
+                break
+    
+logging.error('End YouTube search')
 ]]>   
                  </ontextchange>
              </control>
@@ -205,14 +209,6 @@ logging.error('##################')
 							<pagecontrol>-</pagecontrol>
 							<orientation>vertical</orientation>
 							<itemlayout width="337" height="28">
-								<control type="image">
-									<posx>0</posx>
-									<posy>0</posy>
-									<width>337</width>
-									<height>28</height>
-									<texture>white.png</texture>
-									<colordiffuse>FFD33B37</colordiffuse>
-								</control>
 								<control type="label">
 									<posx>-320</posx>
 									<posy>0</posy>
@@ -221,20 +217,12 @@ logging.error('##################')
 									<font>font28b</font>
 									<align>left</align>
 									<aligny>center</aligny>
-									<label>[UPPERCASE]$INFO[ListItem.name][/UPPERCASE]</label>
+									<label>[UPPERCASE]$INFO[ListItem.Title][/UPPERCASE]</label>
 									<textcolor>white</textcolor>
 									<selectedcolor>FFFDF041</selectedcolor>
 								</control>
 							</itemlayout>
 							<focusedlayout width="337" height="28">
-								<control type="image">
-									<posx>0</posx>
-									<posy>0</posy>
-									<width>337</width>
-									<height>28</height>
-									<texture>white.png</texture>
-									<colordiffuse>FFD33B37</colordiffuse>
-								</control>
 								<control type="label">
 									<visible>!Control.HasFocus(4499)</visible>
 									<posx>-320</posx>
@@ -244,7 +232,7 @@ logging.error('##################')
 									<font>font28b</font>
 									<align>left</align>
 									<aligny>center</aligny>
-									<label>[UPPERCASE]$INFO[ListItem.name][/UPPERCASE]</label>
+									<label>[UPPERCASE]$INFO[ListItem.Title][/UPPERCASE]</label>
 									<textcolor>white</textcolor>
 									<selectedcolor>FFFDF041</selectedcolor>
 								</control>
@@ -257,7 +245,7 @@ logging.error('##################')
 									<font>font28b</font>
 									<align>left</align>
 									<aligny>center</aligny>
-									<label>[UPPERCASE]$INFO[ListItem.name][/UPPERCASE]</label>
+									<label>[UPPERCASE]$INFO[ListItem.Title][/UPPERCASE]</label>
 									<textcolor>FFFDF041</textcolor>
 									<selectedcolor>FFFDF041</selectedcolor>
 									<scroll>true</scroll>
@@ -289,13 +277,14 @@ logging.error('ITEM CLICKED')
 				</control>
 				<control type="image">
 					<visible>!Player.HasVideo</visible>
-					<posx>180</posx>
-					<posy>150</posy>
-					<width>565</width>
-					<height>380</height>
-					<texture>$INFO[Container(4499).ListItem.thumb]</texture>
+					<posx>472</posx>
+					<posy>170</posy>
+					<width>590</width>
+					<height>518</height>
+					<texture>$INFO[Container(4499).ListItem.Thumb]</texture>
 				</control>
 				<control type="button" id="114">
+					<visible>!Control.HasFocus(4499)</visible>
 					<posx>418</posx>
 					<posy>280</posy>
 					<width>120</width>
