@@ -188,7 +188,7 @@ if data_obj:
                         user_id = config.GetValue('user_id')
                         vid_href = str(link[u'href'])
                         title = entry['title']['$t']
-                        stopVid(user_id)
+                        endVid(user_id)
                         startVid(user_id, vid_href, title)
 
                         # Break
