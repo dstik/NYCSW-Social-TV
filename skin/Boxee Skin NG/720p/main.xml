@@ -162,8 +162,7 @@ logging.error('##################')
                         boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
                         boxeeItem.SetPath(str(link[u'href']))
 
-    	        logging.error('LIST ITEM    : ' + str(link))
-    	        logging.error('LIST ITEM VID: ' + item[u'url'])
+    	                logging.error('LIST ITEM    : ' + str(link))
 
 
                         # Run video
