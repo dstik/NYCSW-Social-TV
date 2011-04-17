@@ -2,8 +2,6 @@
 <window type="window" id="14000">
 			<onload lang="python">
 <![CDATA[
-import urllib
-logging.error('##################')
 items = mc.ListItems()
 item = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
 item.SetPath("http://www.youtube.com/watch?v=X-tNXS-ihwI")
