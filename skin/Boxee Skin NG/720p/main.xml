@@ -162,7 +162,7 @@ mc.LogDebug('##################')
                  <texturefocus>youtubelogo.png</texturefocus>
                  -->
                  <texturenofocus>searchlens.png</texturenofocus>
-                 <texturefocus>searchlens.png</texturefocus>
+                 <texturefocus>searchlensfocus.png</texturefocus>
                  <visible>true</visible>
                  <onclick lang="python">
 <![CDATA[
@@ -171,18 +171,24 @@ mc.LogDebug('##################')
 searchq = mc.GetWindow(14000).GetEdit(215).GetText()
 
 # Get the data
+#mc.ShowDialogNotification("Getting YouTube data")
 data_obj = urllib2.urlopen("http://gdata.youtube.com/feeds/api/videos?q=" + urllib.quote(searchq) + "&caption&v=2&alt=json")
-mc.ShowDialogNotification("http://gdata.youtube.com/feeds/api/videos?q=" + urllib.quote(searchq) + "&caption&v=2&alt=json")
+
 if data_obj:
+    #mc.ShowDialogNotification("Loading data")
     data = json.load(data_obj)
     if data and len(data) > 0:
+        #mc.ShowDialogNotification("Getting entries")
         entries = data['feed']['entry']
         if entries and len(entries) > 0:
+            #mc.ShowDialogNotification("Getting entry")
             entry = entries[0]
             if entry and len(entry) > 0:
+                #mc.ShowDialogNotification("Getting links")
                 links = entry['link']
                 for link in links:
                     if link['type'] == "text/html":
+                        #mc.ShowDialogNotification("Running video")
                         # Run video
                         config = mc.GetApp().GetLocalConfig()
                         user_id = config.GetValue('user_id')
