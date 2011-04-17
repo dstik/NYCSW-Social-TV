@@ -78,7 +78,7 @@ myJobManager.start()
 mc.LogDebug('##################UNLOAD')
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue("user_id")
-#stopVid(user_id)
+stopVid(user_id)
 logging.debug('Logging out USER_ID: ' + user_id)
 urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogout/" + user_id)
 myJobManager.stop()
@@ -174,8 +174,8 @@ if data_obj:
 						config = mc.GetApp().GetLocalConfig()
 						user_id = config.GetValue('user_id')
 						vid_href = str(link[u'href'])
-#                        stopVid(user_id)
-#                        startVid(user_id, vid_href, 'Needs title code')
+                        stopVid(user_id)
+                        startVid(user_id, vid_href, 'Needs title code')
 
                         # Break
                         break
@@ -278,8 +278,8 @@ logging.debug('LIST ITEM    : ' + str(link))
 # Run video
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue('user_id')
-#endVid(user_id)
-#startVid(user_id, str(link[u'href']) , 'Needs title code')
+endVid(user_id)
+startVid(user_id, str(link[u'href']) , 'Needs title code')
 ]]>
 					</onclick>
           </control>
