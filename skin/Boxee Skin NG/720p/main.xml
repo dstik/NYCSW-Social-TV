@@ -13,32 +13,19 @@ import random
 import getpass
 import simplejson as json
 
-'''
-name_list = ['Shane Reiser', 
-             "Charlie O'Donnell", 
-             'Fred Wilson', 
-             'Chris Dixon', 
-             'Mark Suster', 
-             'Paul Buchheit', 
-             'Paul Graham', 
-             'Bill Gates', 
-             'Steve Ballmer', 
-             'Steve Jobs', 
-             'Larry Page',
-             'Sergey Brin'
-]
-'''
 logging.error('##################')
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue('user_id')
 if not user_id:
     user_id = 'boxeer_' + str(random.randrange(100000, 999999))
     config.SetValue("user_id", user_id)
+#config.SetValue("user_id", 'boxeer_' + str(random.randrange(100000, 999999)))
 user_name = config.GetValue('user_name')
 if not user_name:
     #user_name = name_list[random.randrange(0, len(name_list))]
     user_name = getpass.getuser()
     config.SetValue("user_name", user_name)
+#config.SetValue("user_name", 'Heliodor')
 logging.error('Logging in USER_ID: ' + user_id)
 logging.error('Logging in USER_NAME: ' + user_name)
 urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogin/" + user_id + "/" + urllib.quote(user_name))
@@ -67,6 +54,7 @@ class PollingJob(jobmanager.BoxeeJob):
                 boxeeItems.append(boxeeItem)
     	        logging.error('LIST SIZE: ' + str(len(boxeeItems)))
             #something
+            mc.GetWindow(14000).GetList(4499).SetItems(boxeeItems)
         logging.error('JOB-JOB-JOB-JOB-JOB-JOB')
 
 
@@ -75,6 +63,8 @@ myJobManager = jobmanager.BoxeeJobManager(5)
 
 #Add polling job to Job Manager:
 myJob = PollingJob("MESSAGE GOES HERE", 5)
+#Do a first run ourselves, then put it on a timer
+myJob.process()
 myJobManager.addJob(myJob)
 
 #Start Job Manager:
@@ -90,6 +80,7 @@ logging.error('Logging out USER_ID: ' + user_id)
 urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogout/" + user_id)
 if mc.GetPlayer().IsPlaying():
     mc.GetPlayer().Stop()
+myJobManager.stop()
 logging.error('##################')
 ]]>
 		   </onunload>
@@ -148,7 +139,7 @@ logging.error('##################')
                  <onup>-</onup>   
                  <ondown>9002</ondown>   
                  <onprev>214</onprev>   
-                 <onnext>214</onnext>   
+                 <onnext>215</onnext>   
                  <label>-</label>
                  <align>left</align>   
                  <aligny>center</aligny>   
@@ -181,6 +172,83 @@ logging.error('##################')
 -->
           </control>
 
+		<control type="list" id="4499">
+							<posx>30</posx>
+							<posy>30</posy>
+							<width>240</width>
+							<height>660</height>
+							<scrolltime>200</scrolltime>
+							<pagecontrol>-</pagecontrol>
+							<orientation>vertical</orientation>
+							<itemlayout width="337" height="28">
+								<control type="image">
+									<posx>0</posx>
+									<posy>0</posy>
+									<width>337</width>
+									<height>28</height>
+									<texture>white.png</texture>
+									<colordiffuse>FFD33B37</colordiffuse>
+								</control>
+								<control type="label">
+									<posx>-320</posx>
+									<posy>0</posy>
+									<width>657</width>
+									<height>28</height>
+									<font>font28b</font>
+									<align>left</align>
+									<aligny>center</aligny>
+									<label>[UPPERCASE]$INFO[ListItem.name][/UPPERCASE]</label>
+									<textcolor>white</textcolor>
+									<selectedcolor>FFFDF041</selectedcolor>
+								</control>
+							</itemlayout>
+							<focusedlayout width="337" height="28">
+								<control type="image">
+									<posx>0</posx>
+									<posy>0</posy>
+									<width>337</width>
+									<height>28</height>
+									<texture>white.png</texture>
+									<colordiffuse>FFD33B37</colordiffuse>
+								</control>
+								<control type="label">
+									<visible>!Control.HasFocus(4499)</visible>
+									<posx>-320</posx>
+									<posy>0</posy>
+									<width>657</width>
+									<height>28</height>
+									<font>font28b</font>
+									<align>left</align>
+									<aligny>center</aligny>
+									<label>[UPPERCASE]$INFO[ListItem.name][/UPPERCASE]</label>
+									<textcolor>white</textcolor>
+									<selectedcolor>FFFDF041</selectedcolor>
+								</control>
+								<control type="label">
+									<visible>Control.HasFocus(4499)</visible>
+									<posx>-320</posx>
+									<posy>0</posy>
+									<width>657</width>
+									<height>28</height>
+									<font>font28b</font>
+									<align>left</align>
+									<aligny>center</aligny>
+									<label>[UPPERCASE]$INFO[ListItem.name][/UPPERCASE]</label>
+									<textcolor>FFFDF041</textcolor>
+									<selectedcolor>FFFDF041</selectedcolor>
+									<scroll>true</scroll>
+									<scrollspeed>30</scrollspeed>
+								</control>
+							</focusedlayout>
+					<onclick lang="python"><![CDATA[
+# list item selection goes here
+import logging
+logging.error('ITEM CLICKED')
+]]>
+					</onclick>
+          </control>
+
+
          <control type="image">
              <posx>370</posx>
              <posy>90</posy>
@@ -201,7 +269,7 @@ logging.error('##################')
 					<posy>150</posy>
 					<width>565</width>
 					<height>380</height>
-					<texture>$INFO[Container(111).ListItem.Thumb]</texture>
+					<texture>$INFO[Container(4499).ListItem.thumb]</texture>
 				</control>
 				<control type="button" id="114">
 					<posx>418</posx>
