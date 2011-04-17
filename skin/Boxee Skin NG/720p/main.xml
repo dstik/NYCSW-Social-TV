@@ -13,6 +13,19 @@ import random
 import getpass
 import simplejson as json
 
+def startVid(user_id, video_id, video_name):
+    logging.debug('APIS: Start video: ' + user_id + '  /  ' + video_id + '  /  ' + video_name)
+    boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
+    boxeeItem.SetPath(video_id)
+    mc.GetPlayer().PlayInBackground(boxeeItem)
+    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoStart/" + urllib.quote_plus(user_id) + "/" + urllib.quote_plus(video_id) + "/" + urllib.quote_plus(video_name))
+    return boxeeItem
+
+def endVid(user_id):
+    logging.debug('APIS: End video: ' + user_id)
+    mc.GetPlayer().Stop()
+    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoEnd/" + urllib.quote_plus(user_id))
+
 logging.getLogger().setLevel(logging.DEBUG)
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue('user_id')
@@ -75,7 +88,7 @@ myJobManager.start()
 config = mc.GetApp().GetLocalConfig()
 user_id = config.GetValue("user_id")
 logging.debug('APIS: Log out: ' + user_id)
-stopVid(user_id)
+endVid(user_id)
 urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogout/" + user_id)
 myJobManager.stop()
 mc.LogDebug('##################')

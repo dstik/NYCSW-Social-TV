@@ -59,18 +59,7 @@ class HelloWorldJob(jobmanager.BoxeeJob):
         mc.LogDebug(self.message)
 '''
 
-def startVid(user_id, video_id, video_name):
-    logging.debug('APIS: Start video: ' + user_id + '  /  ' + video_id + '  /  ' + video_name)
-    boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
-    boxeeItem.SetPath(video_id)
-    mc.GetPlayer().PlayInBackground(boxeeItem)
-    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoStart/" + urllib.quote(user_id) + "/" + urllib.quote(video_id) + "/" + urllib.quote(video_name))
-    return boxeeItem
 
-def endVid(user_id):
-    logging.debug('APIS: End video: ' + user_id)
-    mc.GetPlayer().Stop()
-    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoEnd/" + urllib.quote(user_id))
 
 
 '''
