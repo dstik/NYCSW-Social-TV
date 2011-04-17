@@ -77,15 +77,12 @@ myJobManager.start()
 		   </onload>
 		<onunload lang="python">
 <![CDATA[
-logging.debug('##################')
 config = mc.GetApp().GetLocalConfig()
-user_id = config.GetValue("username")
+user_id = config.GetValue("user_id")
+stopVid(user_id, vid_href)
 logging.debug('Logging out USER_ID: ' + user_id)
 urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogout/" + user_id)
-if mc.GetPlayer().IsPlaying():
-    mc.GetPlayer().Stop()
 myJobManager.stop()
-logging.debug('##################')
 ]]>
 		   </onunload>
 	<defaultcontrol always="true">120</defaultcontrol>
@@ -173,9 +170,12 @@ if data_obj:
                         boxeeItem.SetPath(str(link[u'href']))
 
                         # Run video
+						config = mc.GetApp().GetLocalConfig()
+						user_id = config.GetValue('user_id')
+						vid_href = str(link[u'href'])
                         if mc.GetPlayer().IsPlaying():
-                            mc.GetPlayer().Stop()
-                        mc.GetPlayer().PlayInBackground(boxeeItem)
+                            stopVid(user_id, vid_href)
+                        startVid(user_id, vid_href, 'Needs title code')
 
                         # Break
                         break
@@ -279,6 +279,9 @@ logging.debug('LIST ITEM    : ' + str(link))
 if mc.GetPlayer().IsPlaying():
     mc.GetPlayer().Stop()
 mc.GetPlayer().PlayInBackground(boxeeItem)
+config = mc.GetApp().GetLocalConfig()
+user_id = config.GetValue('user_id')
+startVid(user_id, str(link[u'href']) , 'Needs title code')
 ]]>
 					</onclick>
           </control>
