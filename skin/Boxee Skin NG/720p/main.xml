@@ -59,11 +59,11 @@ class PollingJob(jobmanager.BoxeeJob):
         if data_obj:
             boxeeItems = mc.ListItems()
             data = json.load(data_obj)
-            for item in data['items']:
+            for item in data:
                 boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
     	        logging.error('LIST ITEM    : ' + str(item))
-    	        logging.error('LIST ITEM URL: ' + item[u'videourl'])
-                boxeeItem.SetPath(str(item[u'videourl']))
+    	        logging.error('LIST ITEM VID: ' + item[u'url'])
+                boxeeItem.SetPath(str(item[u'url']))
                 boxeeItems.append(boxeeItem)
     	        logging.error('LIST SIZE: ' + str(len(boxeeItems)))
             #something
