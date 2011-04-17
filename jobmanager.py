@@ -1,5 +1,9 @@
 import threading
 import mc
+import logging
+import urllib
+import urllib2
+import simplejson as json
 
 ''' 
 Boxee Job Manager
@@ -54,6 +58,17 @@ class HelloWorldJob(jobmanager.BoxeeJob):
         # This is the base function that is always called for every job and the one you should extend.
         mc.LogDebug(self.message)
 '''
+
+def startVid(user_id, video_id, video_name):
+    boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
+    boxeeItem.SetPath(video_id)
+    mc.GetPlayer().PlayInBackground(boxeeItem)
+    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoStart/" + urllib.quote(user_id) + "/" + urllib.quote(video_id)) + "/" + urllib.quote(video_name))
+    return boxeeItem
+
+def endVid(user_id):
+    mc.GetPlayer().Stop()
+    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoEnd/" + urllib.quote(user_id))
 
 
 '''
