@@ -66,9 +66,9 @@ def startVid(user_id, video_id, video_name):
     urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoStart/" + urllib.quote(user_id) + "/" + urllib.quote(video_id)) + "/" + urllib.quote(video_name))
     return boxeeItem
 
-def endVid(user_id, video_id):
+def endVid(user_id):
     mc.GetPlayer().Stop()
-    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoEnd/" + urllib.quote(user_id) + "/" + urllib.quote(video_id))
+    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoEnd/" + urllib.quote(user_id))
     
 
 
