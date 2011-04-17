@@ -63,7 +63,7 @@ def startVid(user_id, video_id, video_name):
     boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
     boxeeItem.SetPath(video_id)
     mc.GetPlayer().PlayInBackground(boxeeItem)
-    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoStart/" + urllib.quote(user_id) + "/" + urllib.quote(video_id)) + "/" + urllib.quote(video_name))
+    urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/videoStart/" + urllib.quote(user_id) + "/" + urllib.quote(video_id) + "/" + urllib.quote(video_name))
     return boxeeItem
 
 def endVid(user_id):
