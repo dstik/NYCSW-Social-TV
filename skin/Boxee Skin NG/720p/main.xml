@@ -77,15 +77,14 @@ myJobManager.start()
 		   </onload>
 		<onunload lang="python">
 <![CDATA[
-logging.debug('##################')
+mc.GetPlayer().Stop()
+mc.LogDebug('##################UNLOAD')
 config = mc.GetApp().GetLocalConfig()
-user_id = config.GetValue("username")
+user_id = config.GetValue("user_id")
 logging.debug('Logging out USER_ID: ' + user_id)
-urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogout/" + user_id)
-if mc.GetPlayer().IsPlaying():
-    mc.GetPlayer().Stop()
+urllib2.urlopen("http://boxee.coviewer.tv:8124/boxee/userLogout/" + urllib.quote(user_id) )
 myJobManager.stop()
-logging.debug('##################')
+mc.LogDebug('##################')
 ]]>
 		   </onunload>
 	<defaultcontrol always="true">120</defaultcontrol>
@@ -158,6 +157,7 @@ searchq = mc.GetWindow(14000).GetEdit(215).GetText()
 
 # Get the data
 data_obj = urllib2.urlopen("http://gdata.youtube.com/feeds/api/videos?q=" + urllib.quote(searchq) + "&caption&v=2&alt=json")
+mc.ShowDialogNotification("http://gdata.youtube.com/feeds/api/videos?q=" + urllib.quote(searchq) + "&caption&v=2&alt=json")
 if data_obj:
     data = json.load(data_obj)
     if data and len(data) > 0:
