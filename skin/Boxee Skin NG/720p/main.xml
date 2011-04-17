@@ -215,7 +215,7 @@ logging.error('End YouTube search')
 							<orientation>vertical</orientation>
 							<itemlayout width="337" height="28">
 								<control type="label">
-									<posx>-320</posx>
+									<posx>0</posx>
 									<posy>0</posy>
 									<width>657</width>
 									<height>28</height>
@@ -230,7 +230,7 @@ logging.error('End YouTube search')
 							<focusedlayout width="337" height="28">
 								<control type="label">
 									<visible>!Control.HasFocus(4499)</visible>
-									<posx>-320</posx>
+									<posx>0</posx>
 									<posy>0</posy>
 									<width>657</width>
 									<height>28</height>
@@ -243,7 +243,7 @@ logging.error('End YouTube search')
 								</control>
 								<control type="label">
 									<visible>Control.HasFocus(4499)</visible>
-									<posx>-320</posx>
+									<posx>0</posx>
 									<posy>0</posy>
 									<width>657</width>
 									<height>28</height>
