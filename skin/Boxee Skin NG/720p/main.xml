@@ -149,7 +149,32 @@ logging.error('##################')
                  <texturefocus>searchtext.png</texturefocus>
                  <ontextchange lang="python">
 <![CDATA[
+        logging.error('Start YouTube search')
+        data_obj = urllib2.urlopen("http://gdata.youtube.com/feeds/api/videos?q=surfing&caption&v=2&alt=json")
+        if data_obj:
+            data = json.load(data_obj)
+            if data and len(data) > 0:
+                links = data['feed']['entry']['link']
+                for link in links:
+                    if link['type'] == "text/html":
 
+                        # Create items
+                        boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
+                        boxeeItem.SetPath(str(link[u'href']))
+
+    	        logging.error('LIST ITEM    : ' + str(link))
+    	        logging.error('LIST ITEM VID: ' + item[u'url'])
+
+
+                        # Run video
+                        if mc.GetPlayer().IsPlaying():
+                            mc.GetPlayer().Stop()
+                        mc.GetPlayer().PlayInBackground(boxeeItem)
+
+                        # Break
+                        break
+            
+        logging.error('End YouTube search')
 ]]>   
                  </ontextchange>
              </control>
