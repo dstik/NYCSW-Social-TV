@@ -125,40 +125,61 @@ logging.error('##################')
 			<width>250</width>
 			<height>37</height>
              <texture>sideheader.png</texture>
-          </control>
-		  <control type="image">
-             <posx>465</posx>
-             <posy>10</posy>
-			<width>500</width>
-			<height>58</height>
-             <texture>searchbar.png</texture>
+
           </control>
 
-    <control type="edit" id="9001">   
-       <posx>580</posx>   
-       <posy>10</posy>   
-       <width>380</width>   
-       <height>58</height>   
-       <onleft>-</onleft>   
-       <onright>-</onright>   
-       <onup>-</onup>   
-       <ondown>9002</ondown>   
-       <onprev>9003</onprev>   
-       <onnext>9002</onnext>   
-       <label>-</label>   
-       <textoffsetx>8</textoffsetx>   
-       <align>left</align>   
-       <aligny>center</aligny>   
-       <font>font28</font>   
-       <textcolor>white</textcolor>
-       <texturenofocus>login_textbox.png</texturenofocus>
-       <texturefocus>login_textbox_on.png</texturefocus>
-       <ontextchange lang="python">
+          <control type="group">
+
+             <control type="image" id="214">
+                 <posx>465</posx>
+                 <posy>10</posy>
+                 <width>116</width>
+                 <height>58</height>
+                 <texture>youtubelogo.png</texture>
+             </control>
+
+             <control type="edit" id="215">   
+                 <posx>580</posx>   
+                 <posy>10</posy>   
+                 <width>380</width>   
+                 <height>58</height>   
+                 <onleft>-</onleft>   
+                 <onright>-</onright>   
+                 <onup>-</onup>   
+                 <ondown>9002</ondown>   
+                 <onprev>214</onprev>   
+                 <onnext>214</onnext>   
+                 <label>-</label>
+                 <align>left</align>   
+                 <aligny>center</aligny>   
+                 <font>font28</font>   
+                 <textcolor>black</textcolor>
+                 <texturenofocus>searchtext.png</texturenofocus>
+                 <texturefocus>searchtext.png</texturefocus>
+                 <ontextchange lang="python">
+<![CDATA[
+
+]]>   
+                 </ontextchange>
+             </control>
+<!--
+             <control type="button" id="216">
+                 <posx>920</posx>
+                 <posy>10</posy>
+                 <width>50</width>
+                 <height>58</height>
+                 <label>Search</label>
+                 <texturenofocus>-</texturenofocus>
+                 <texturefocus>youtubelogo.png</texturefocus>
+                 <visible>true</visible>
+                 <onclick lang="python">
 <![CDATA[
 ]]>   
-       </ontextchange>
-    </control>
-
+</onclick>
+                 <onright>111</onright>
+             </control>
+-->
+          </control>
 
          <control type="image">
              <posx>370</posx>
