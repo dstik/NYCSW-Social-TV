@@ -60,9 +60,9 @@ class PollingJob(jobmanager.BoxeeJob):
                 boxeeItem = mc.ListItem( mc.ListItem.MEDIA_VIDEO_CLIP )
     	        logging.debug('LIST ITEM    : ' + str(item))
     	        logging.debug('LIST ITEM VID: ' + item[u'url'])
-                boxeeItem.SetPath(str(item[u'url']))
-                boxeeItem.SetTitle(str(item[u'firstname']))
-                boxeeItem.SetLabel(str(item[u'name']))
+                boxeeItem.SetPath(urllib.unquote_plus(str(item[u'url'])))
+                boxeeItem.SetTitle(urllib.unquote_plus(str(item[u'firstname'])))
+                boxeeItem.SetLabel(urllib.unquote_plus(str(item[u'name'])))
                 boxeeItems.append(boxeeItem)
     	        logging.debug('LIST SIZE: ' + str(len(boxeeItems)))
             #something
